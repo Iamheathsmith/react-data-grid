@@ -227,6 +227,10 @@ export default function InteractionMasks<R, SR>({
   function handleCopy(): void {
     const { idx, rowIdx } = selectedPosition;
     const value = rows[rowIdx][columns[idx].key as keyof R];
+
+    navigator.clipboard.writeText(String(value))
+      .catch(error => { console.error('Failed to copy to clipboard', { error }); });
+
     setCopiedPosition({ idx, rowIdx, value });
   }
 
